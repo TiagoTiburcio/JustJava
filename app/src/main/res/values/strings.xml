@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">JustJava</string>
+    <string name="quantity">Quantity</string>
+    <string name="order">order</string>
+    <string name="price">Price</string>
+    <string name="substract">-</string>
+    <string name="sum">+</string>
+    <string name="value_init">0</string>
+    <string name="free">Free!!!</string>
+    <string name="thank_you">Thank You!!!</string>
+    <string name="toppings">Toppings</string>
+    <string name="whipped_cream">whipped Cream</string>
+    <string name="chocolate">Chocolate</string>
+    <string name="name">Name</string>
+</resources>
