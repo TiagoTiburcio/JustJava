@@ -1,7 +1,10 @@
 package com.example.tiagoc.justjava;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -37,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
      * @param view - View  of Main Activity
      */
     public void submitOrder(View view) {
-        this.mViewHolder.priceTextView.setVisibility(View.GONE);
+        //this.mViewHolder.priceTextView.setVisibility(View.GONE);
         this.displaySummary();
+        Log.v(this.getClass().getName().toString(),"display summary.");
     }
 
     /**
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     public void sumOrder(View view) {
         this.quantity = Integer.valueOf(this.mViewHolder.quantityTextView.getText().toString()) + 1;
         this.displayQuantity();
+        Log.v(this.getClass().getName().toString(),"increment product.");
     }
 
     /**
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             this.quantity = Integer.valueOf(this.mViewHolder.quantityTextView.getText().toString()) - 1;
         }
         displayQuantity();
+        Log.v(this.getClass().getName().toString(),"decrement product.");
     }
 
 
@@ -102,11 +108,24 @@ public class MainActivity extends AppCompatActivity {
         }else {
             message = message + "\n Free!!";
         }
-        this.mViewHolder.summaryTextView.setText(message);
+
+        composeEmail("Order Coffee of " + this.mViewHolder.nameEditText.getText().toString(),message);
+        //this.mViewHolder.summaryTextView.setText(message);
     }
 
     public void refreshPrice(View view) {
         this.displayQuantity();
+        Log.v(this.getClass().getName().toString(),"refresh Price.");
+    }
+
+    public void composeEmail(String subject,String text) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     private class ViewHolder{
